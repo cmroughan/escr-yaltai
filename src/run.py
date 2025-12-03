@@ -47,16 +47,29 @@ def run_yaltai(
     repo_dir: pathlib.Path,
     time_requested: datetime.timedelta = datetime.timedelta(minutes=10),
     model: str = "model_citing-marx_2025-06.pt",
+    email = False,
     ):
-    yaltai_slurm = Slurm(
-        nodes=1,
-        ntasks=1,
-        cpus_per_task=1,
-        mem_per_cpu='3G',
-        gres=['gpu:1'],
-        job_name='yaltai',
-        time=time_requested,
-    )
+    
+    if email:
+        yaltai_slurm = Slurm(
+            nodes=1,
+            ntasks=1,
+            cpus_per_task=1,
+            mem_per_cpu='3G',
+            job_name='yaltai',
+            time=time_requested,
+            mail_type='end',
+            mail_user='EMAIL_HERE'
+        )
+    else:
+        yaltai_slurm = Slurm(
+            nodes=1,
+            ntasks=1,
+            cpus_per_task=1,
+            mem_per_cpu='3G',
+            job_name='yaltai',
+            time=time_requested,
+        )
     
     # add commands for setup steps
     yaltai_slurm.add_cmd("module purge")
@@ -95,11 +108,11 @@ def calculate_remaining_time(job_stats):
         total_duration = math.ceil(job_duration / count_completed * count_to_process * 1.2)
         duration_minutes = datetime.timedelta(minutes=math.ceil(total_duration / 60))
         
-        # Don't put in a request for less than 10 minutes, or more than 8 hours
+        # Don't put in a request for less than 10 minutes, or more than 10 hours
         if duration_minutes < datetime.timedelta(minutes=10):
             duration_minutes = datetime.timedelta(minutes=10)
-        elif duration_minutes > datetime.timedelta(minutes=480):
-            duration_minutes = datetime.timedelta(minutes=480)
+        elif duration_minutes > datetime.timedelta(minutes=600):
+            duration_minutes = datetime.timedelta(minutes=600)
         
         return duration_minutes
         
@@ -324,6 +337,7 @@ def main():
                 repo_dir,
                 time_requested,
                 "model_citing-marx_2025-06.pt",
+                True,
             )
             monitor_slurm_job(job_id)
             
