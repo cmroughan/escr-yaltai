@@ -7,6 +7,9 @@ This is a repository to share code used for a workflow that combines segmentatio
 Clone the repository, then set up the conda environment. `cd` into the base `escr-yaltai` directory and then run the following commands:
 
 ```
+cd /scratch/network/$USER
+git clone https://github.com/cmroughan/escr-yaltai.git
+cd escr-yaltai
 module purge
 module load anaconda3/2024.2
 conda env create -f environment.yml
@@ -14,9 +17,7 @@ conda env create -f environment.yml
 
 ## Running the code
 
-Download an **ALTO XML** export from eScriptorium **with images** included. Upload this .zip file to the `1_UPLOAD/` directory.
-
-`cd` into the `escr-yaltai\src` directory and then run the below commands.
+Download an **ALTO XML** export from eScriptorium **with images** included. Upload this .zip file to the `1_UPLOAD/` directory. Then run the below commands.
 
 (If you have not yet loaded anaconda:)
 
@@ -28,8 +29,14 @@ module load anaconda3/2024.2
 Then:
 
 ```
+cd /scratch/network/$USER/escr-yaltai/src
 conda activate yaltai
 tmux
+```
+
+Then, inside the `tmux` session, run:
+
+```
 python run.py
 ```
 
