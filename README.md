@@ -40,7 +40,7 @@ Then, inside the `tmux` session, run:
 python run.py
 ```
 
-Running the python code in `tmux` ensures that the code keeps running even if you close the command line.
+Running the python code in `tmux` ensures that the code keeps running even if you close the command line. You can detach from `tmux` and keep using the command line while the code is running by pressing `ctrl-b`, then `d` on your keyboard.
 
 ## Results
 
