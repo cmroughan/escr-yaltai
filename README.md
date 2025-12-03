@@ -4,7 +4,7 @@ This is a repository to share code used for a workflow that combines segmentatio
 
 ## Setup
 
-Clone the repository, then set up the conda environment. `cd` into the base `escr-yaltai` directory and then run the following commands:
+Clone the repository and then set up the conda environment using the following commands:
 
 ```
 cd /scratch/network/$USER
