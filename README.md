@@ -15,6 +15,8 @@ module load anaconda3/2024.2
 conda env create -f environment.yml
 ```
 
+Then, to receive emails when the segmentation recognition is complete, go into `src/run.py` and edit line 62 to input your email address.
+
 ## Running the code
 
 Download an **ALTO XML** export from eScriptorium **with images** included. Upload this .zip file to the `1_UPLOAD/` directory. Then run the below commands.
